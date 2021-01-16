@@ -7,12 +7,6 @@ const server = app.listen(PORT, () => {
 });
 app.use(express.static("client"));
 
-// url
-
-const path = require("path");
-
-console.log(path.dirname("__"));
-
 //spotify credentials
 const credentials = require("./credentials.js");
 
@@ -33,5 +27,12 @@ app.get("/authorize", function (req, res) {
 
 // callback after authorization
 app.get("/callback", (req, res) => {
-    res.send("this is the callback site");
+    if (req.query.error) {
+        res.redirect(`/?error=${req.query.error}`);
+        return;
+    }
+    if (req.query.code) {
+        res.redirect(`/finder.html?code=${req.query.code}`);
+        return;
+    }
 });
