@@ -7,6 +7,12 @@ const server = app.listen(PORT, () => {
 });
 app.use(express.static("client"));
 
+// axios
+const axios = require("axios");
+
+// qs
+const qs = require("qs");
+
 //spotify credentials
 const credentials = require("./credentials.js");
 
@@ -26,13 +32,40 @@ app.get("/authorize", function (req, res) {
 });
 
 // callback after authorization
-app.get("/callback", (req, res) => {
+app.get("/callback", async (req, res) => {
     if (req.query.error) {
         res.redirect(`/?error=${req.query.error}`);
         return;
     }
-    if (req.query.code) {
-        res.redirect(`/finder.html?code=${req.query.code}`);
-        return;
+    if (!req.query.code) return;
+
+    const url = "https://accounts.spotify.com/api/token";
+    const headers = {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        auth: {
+            username: credentials.clientID,
+            password: credentials.clientSecret,
+        },
+    };
+    const redirect_url = req.protocol + "://" + req.headers.host + "/callback";
+    const body = qs.stringify({
+        grant_type: "authorization_code",
+        code: req.query.code,
+        redirect_uri: redirect_url,
+    });
+    try {
+        const response = await axios.post(url, body, headers);
+        if (response.status == 200) {
+            const token = response["data"]["access_token"];
+            res.redirect(`/finder.html?token=${token}`);
+        } else {
+            res.redirect(`/?error=${response.status}`);
+        }
+    } catch (err) {
+        res.redirect(`/?error=${err.message}`);
     }
+    return;
 });
