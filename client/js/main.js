@@ -10,6 +10,7 @@ $("#findBtn").click(() => {
         title: $("#titleInput").val(),
         artist: $("#artistInput").val(),
         case: $("#caseInput").prop("checked"),
+        exact: $("#exactInput").prop("checked"),
     };
     showPlaylists(options);
 });

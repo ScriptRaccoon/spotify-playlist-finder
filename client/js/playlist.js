@@ -14,12 +14,20 @@ async function getPlaylists(options) {
                 let toAdd = true;
                 if (options.title) {
                     const tracks = await getTracks(id);
-                    if (options.case) {
+                    if (options.case && options.exact) {
                         toAdd = tracks.some((track) => track.name === options.title);
-                    } else {
+                    } else if (options.case && !options.exact) {
+                        toAdd = tracks.some((track) =>
+                            track.name.includes(options.title)
+                        );
+                    } else if (!options.case && options.exact) {
                         toAdd = tracks.some(
                             (track) =>
                                 track.name.toLowerCase() === options.title.toLowerCase()
+                        );
+                    } else if (!options.case && !options.exact) {
+                        toAdd = tracks.some((track) =>
+                            track.name.toLowerCase().includes(options.title.toLowerCase())
                         );
                     }
                 }
