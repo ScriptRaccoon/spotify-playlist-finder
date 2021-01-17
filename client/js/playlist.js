@@ -11,13 +11,19 @@ async function getPlaylists(options) {
             const data = await response.json();
             for (const playlist of data.items) {
                 const { id, name, description } = playlist;
-                let toAdd = false;
-                if (!options.title) {
-                    toAdd = true;
-                } else {
+                let toAdd = true;
+                if (options.title) {
                     const tracks = await getTracks(id);
-                    toAdd = tracks.some((track) => track.name === options.title);
+                    if (options.case) {
+                        toAdd = tracks.some((track) => track.name === options.title);
+                    } else {
+                        toAdd = tracks.some(
+                            (track) =>
+                                track.name.toLowerCase() === options.title.toLowerCase()
+                        );
+                    }
                 }
+
                 if (toAdd) {
                     showPlaylist(playlist);
                     playlists.push({ id, name, description });

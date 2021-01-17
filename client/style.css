@@ -145,7 +145,7 @@ main {
     margin: 20px 0px;
 }
 
-.formControl input {
+.formControl input[type="text"] {
     text-align: center;
     padding: 10px;
     margin-bottom: 4px;
@@ -155,6 +155,6 @@ main {
     transition: all 100ms linear;
 }
 
-.formControl input:focus {
+.formControl input[type="text"]:focus {
     border-bottom: 1px solid #eaeaea;
 }

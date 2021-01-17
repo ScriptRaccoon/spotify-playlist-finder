@@ -9,6 +9,7 @@ $("#findBtn").click(() => {
     const options = {
         title: $("#titleInput").val(),
         artist: $("#artistInput").val(),
+        case: $("#caseInput").prop("checked"),
     };
     showPlaylists(options);
 });
