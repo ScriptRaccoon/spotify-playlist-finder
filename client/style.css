@@ -107,6 +107,10 @@ main {
 
 /* playlist display */
 
+.summary {
+    padding: 20px 0px;
+}
+
 .playlistContainer {
     margin: 20px auto;
     padding: 20px;

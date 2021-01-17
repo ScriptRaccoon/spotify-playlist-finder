@@ -5,4 +5,10 @@ $(() => {
     showCurrentUser();
 });
 
-$("#findBtn").click(showPlaylists);
+$("#findBtn").click(() => {
+    const options = {
+        title: $("#titleInput").val(),
+        artist: $("#artistInput").val(),
+    };
+    showPlaylists(options);
+});

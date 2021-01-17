@@ -1,19 +1,29 @@
 import { user_id } from "./user.js";
 import { headers } from "./token.js";
-import { showTracks } from "./tracks.js";
+import { hasTrack } from "./tracks.js";
 
-export let playlists = [];
-
-async function getPlaylists() {
+async function getPlaylists(options) {
+    const playlists = [];
     let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
     try {
         while (url) {
             const response = await fetch(url, { headers });
             const data = await response.json();
-            data.items.forEach((playlist) => {
+            for (const playlist of data.items) {
                 const { id, name, description } = playlist;
-                playlists.push({ id, name, description });
-            });
+                console.log("check for playlist " + name);
+                if (!options.title) {
+                    console.log("add it");
+                    playlists.push({ id, name, description });
+                } else {
+                    const hastrack = await hasTrack(id, options.title);
+                    if (hastrack) {
+                        console.log("add it");
+                        playlists.push({ id, name, description });
+                    }
+                }
+                // await new Promise((resolve) => setTimeout(resolve, 5000));
+            }
             url = data.next || null;
         }
         return playlists;
@@ -38,7 +48,12 @@ function showPlaylist(playlist) {
         .appendTo(playlistContainer);
 }
 
-export async function showPlaylists() {
-    await getPlaylists();
+export async function showPlaylists(options) {
+    $("#playlists").html("");
+    const playlists = await getPlaylists(options);
+    $("<div></div>")
+        .text(`${playlists.length} playlists have been found`)
+        .addClass("summary")
+        .appendTo("#playlists");
     playlists.forEach((playlist) => showPlaylist(playlist));
 }
