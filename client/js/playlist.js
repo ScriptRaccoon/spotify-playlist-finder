@@ -10,7 +10,8 @@ async function getPlaylists(options) {
             const response = await fetch(url, { headers });
             const data = await response.json();
             for (const playlist of data.items) {
-                const { id, name, description } = playlist;
+                const { id, name, description, external_urls } = playlist;
+                console.log(playlist);
                 let toAdd = true;
                 if (options.title) {
                     const tracks = await getTracks(id);
@@ -34,7 +35,7 @@ async function getPlaylists(options) {
 
                 if (toAdd) {
                     showPlaylist(playlist);
-                    playlists.push({ id, name, description });
+                    playlists.push({ id, name, description, external_urls });
                 }
             }
             url = data.next || null;
@@ -46,8 +47,10 @@ async function getPlaylists(options) {
 }
 
 function showPlaylist(playlist) {
-    const playlistContainer = $("<div></div>")
+    const playlistContainer = $("<a></a>")
         .attr("id", playlist.id)
+        .attr("href", playlist.external_urls.spotify)
+        .attr("target", "_blank")
         .addClass("playlistContainer")
         .appendTo("#playlists");
     const playlistName = $("<div></div>")
@@ -67,5 +70,9 @@ export async function showPlaylists(options) {
         .addClass("summary")
         .appendTo("#playlists");
     const playlists = await getPlaylists(options);
-    summary.text(`${playlists.length} playlists have been found`);
+    let txt = `${playlists.length} playlists have been found`;
+    if (!options.title) {
+        txt += ". These are all your playlists since you didn't specify a title.";
+    }
+    summary.text(txt);
 }
