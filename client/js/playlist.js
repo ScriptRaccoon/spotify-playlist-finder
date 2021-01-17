@@ -11,14 +11,16 @@ async function getPlaylists(options) {
             const data = await response.json();
             for (const playlist of data.items) {
                 const { id, name, description } = playlist;
+                let toAdd = false;
                 if (!options.title) {
-                    playlists.push({ id, name, description });
+                    toAdd = true;
                 } else {
                     const tracks = await getTracks(id);
-                    const hasTrack = tracks.some((track) => track.name === options.title);
-                    if (hasTrack) {
-                        playlists.push({ id, name, description });
-                    }
+                    toAdd = tracks.some((track) => track.name === options.title);
+                }
+                if (toAdd) {
+                    showPlaylist(playlist);
+                    playlists.push({ id, name, description });
                 }
             }
             url = data.next || null;
@@ -52,5 +54,4 @@ export async function showPlaylists(options) {
         .appendTo("#playlists");
     const playlists = await getPlaylists(options);
     summary.text(`${playlists.length} playlists have been found`);
-    playlists.forEach((playlist) => showPlaylist(playlist));
 }
