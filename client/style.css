@@ -107,16 +107,20 @@ main {
 
 /* playlist display */
 
+#playlists {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
 .summary {
     padding: 20px 0px;
 }
 
 .playlistContainer {
-    margin: 20px auto;
+    margin: 20px 0px;
     padding: 20px;
-    max-width: 600px;
     background-color: #192755;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -126,7 +130,7 @@ main {
 }
 
 .playlistDescription {
-    color: #aaa;
+    font-style: italic;
 }
 
 /* form */

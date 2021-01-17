@@ -1,6 +1,6 @@
 import { user_id } from "./user.js";
 import { headers } from "./token.js";
-import { hasTrack } from "./tracks.js";
+import { getTracks } from "./tracks.js";
 
 async function getPlaylists(options) {
     const playlists = [];
@@ -11,18 +11,15 @@ async function getPlaylists(options) {
             const data = await response.json();
             for (const playlist of data.items) {
                 const { id, name, description } = playlist;
-                console.log("check for playlist " + name);
                 if (!options.title) {
-                    console.log("add it");
                     playlists.push({ id, name, description });
                 } else {
-                    const hastrack = await hasTrack(id, options.title);
-                    if (hastrack) {
-                        console.log("add it");
+                    const tracks = await getTracks(id);
+                    const hasTrack = tracks.some((track) => track.name === options.title);
+                    if (hasTrack) {
                         playlists.push({ id, name, description });
                     }
                 }
-                // await new Promise((resolve) => setTimeout(resolve, 5000));
             }
             url = data.next || null;
         }
@@ -36,7 +33,6 @@ function showPlaylist(playlist) {
     const playlistContainer = $("<div></div>")
         .attr("id", playlist.id)
         .addClass("playlistContainer")
-        .click(() => showTracks(playlist.id))
         .appendTo("#playlists");
     const playlistName = $("<div></div>")
         .addClass("playlistName")
@@ -50,10 +46,11 @@ function showPlaylist(playlist) {
 
 export async function showPlaylists(options) {
     $("#playlists").html("");
-    const playlists = await getPlaylists(options);
-    $("<div></div>")
-        .text(`${playlists.length} playlists have been found`)
+    const summary = $("<div></div>")
+        .text(`Loading...`)
         .addClass("summary")
         .appendTo("#playlists");
+    const playlists = await getPlaylists(options);
+    summary.text(`${playlists.length} playlists have been found`);
     playlists.forEach((playlist) => showPlaylist(playlist));
 }

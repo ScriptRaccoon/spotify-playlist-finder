@@ -24,8 +24,3 @@ export async function getTracks(playlistId) {
         return [];
     }
 }
-
-export async function hasTrack(playlistId, title) {
-    const tracks = await getTracks(playlistId);
-    return tracks.some((track) => track.name === title);
-}
