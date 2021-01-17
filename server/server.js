@@ -67,7 +67,6 @@ app.get("/callback", async (req, res) => {
     } catch (err) {
         res.redirect(`/?error=${err.message}`);
     }
-    return;
 });
 
 // find playlists query
