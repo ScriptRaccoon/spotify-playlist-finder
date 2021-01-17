@@ -1,25 +1,27 @@
 const urlParams = new URLSearchParams(window.location.search);
 let token = urlParams.get("token");
+let display_name, id;
 
-$("#findBtn").click(() => {
-    window.location.href = `/findplaylists?token=${token}`;
-});
-
-$("#userBtn").click(() => {
-    getCurrentUser();
-});
+getCurrentUser();
 
 async function getCurrentUser() {
-    console.log(token);
+    if (!token) return;
     const url = "https://api.spotify.com/v1/me";
     const headers = {
         Authorization: `Bearer ${token}`,
     };
     try {
-        const response = await fetch(url, headers);
-        console.log(response);
+        const response = await fetch(url, { method: "GET", headers: headers });
+        const data = await response.json();
+        display_name = data["display_name"];
+        id = data["id"];
+        $("#display_name").text(display_name);
     } catch (err) {
-        console.log(err.message);
+        window.alert(err.message);
         return null;
     }
 }
+
+$("#findBtn").click(() => {
+    console.log("I will list your playlists...");
+});

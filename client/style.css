@@ -62,7 +62,8 @@ main {
     font-size: 20px;
 }
 
-input[type="button"] {
+.linkBtn {
+    display: inline-block;
     padding: 20px 40px;
     font-size: 25px;
     cursor: pointer;
@@ -71,13 +72,10 @@ input[type="button"] {
     transition: all 100ms linear;
 }
 
-input[type="button"]:hover {
+.linkBtn:hover {
     background-color: rgb(30, 146, 30);
 }
 
-#errorMessage {
-    display: none;
-    color: rgb(172, 41, 41);
+#welcome {
     padding: 20px 0px;
-    font-weight: bold;
 }

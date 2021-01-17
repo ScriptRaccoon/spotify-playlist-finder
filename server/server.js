@@ -27,10 +27,10 @@ app.get("/authorize", function (req, res) {
     );
 });
 
-// callback after authorization
+// callback after authorization and get access token
 app.get("/callback", async (req, res) => {
     if (req.query.error) {
-        res.redirect(`/?error=${req.query.error}`);
+        res.send(`Error: ${req.query.error}`);
         return;
     }
     if (!req.query.code) return;
@@ -58,18 +58,9 @@ app.get("/callback", async (req, res) => {
             const token = response["data"]["access_token"];
             res.redirect(`/finder.html?token=${token}`);
         } else {
-            res.redirect(`/?error=${response.status}`);
+            res.send(`Error: ${response.status}`);
         }
     } catch (err) {
-        res.redirect(`/?error=${err.message}`);
+        res.redirect(`Error: ${err.message}`);
     }
-});
-
-// find playlists query
-app.get("/findplaylists", (req, res) => {
-    if (!req.query.token) {
-        res.redirect("/");
-        return;
-    }
-    console.log("token:", req.query.token);
 });
