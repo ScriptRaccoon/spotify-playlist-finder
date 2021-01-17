@@ -19,6 +19,7 @@ async function getCurrentUser() {
 export async function showCurrentUser() {
     await getCurrentUser();
     $("#user_name").text(user_name);
-    $("#welcome").show();
-    $("#findBtn").show();
+    $("#welcome").fadeIn();
+    $("#findBtn").fadeIn();
+    $("#form").fadeIn();
 }

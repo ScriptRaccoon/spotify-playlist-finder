@@ -16,9 +16,26 @@
     </header>
     <main>
         <h2 id="welcome">Hi, <span id="user_name"></span></h2>
-        <input type="button" class="linkBtn" id="findBtn" value="List your playlists" />
-        <section id="playlists">
+
+        <section id="form" class="form">
+            <div class="formControl">
+                <input type="text" id="titleInput">
+                <small>
+                    Specify the song title
+                </small>
+            </div>
             
+            <div class="formControl">
+                <input type="text" id="artistInput" class="textInput"> 
+                <small>
+                    (Optional) Specify the artist of the song
+                </small>
+            </div>
+            
+            <input type="button" class="linkBtn" id="findBtn" value="List your playlists" />
+        </section>
+
+        <section id="playlists">            
         </section>
     </main>
     
