@@ -69,3 +69,12 @@ app.get("/callback", async (req, res) => {
     }
     return;
 });
+
+// find playlists query
+app.get("/findplaylists", (req, res) => {
+    if (!req.query.token) {
+        res.redirect("/");
+        return;
+    }
+    console.log("token:", req.query.token);
+});

@@ -1,4 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get("token")) {
-    console.log("your token is:", urlParams.get("token"));
-}
+let token = urlParams.get("token");
+
+$("#findBtn").click(() => {
+    window.location.href = `/findplaylists?token=${token}`;
+});

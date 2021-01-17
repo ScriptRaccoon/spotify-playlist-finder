@@ -18,6 +18,26 @@ input {
     outline: none;
 }
 
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: yellow;
+}
+
+header {
+    text-align: center;
+}
+
 main {
     text-align: center;
     max-width: 1200px;
@@ -42,7 +62,7 @@ main {
     font-size: 20px;
 }
 
-#authBtn {
+input[type="button"] {
     padding: 20px 40px;
     font-size: 25px;
     cursor: pointer;
@@ -51,7 +71,7 @@ main {
     transition: all 100ms linear;
 }
 
-#authBtn:hover {
+input[type="button"]:hover {
     background-color: rgb(30, 146, 30);
 }
 
