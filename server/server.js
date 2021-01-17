@@ -7,14 +7,10 @@ const server = app.listen(PORT, () => {
 });
 app.use(express.static("client"));
 
-// axios
+// various packages
 const axios = require("axios");
-
-// qs
 const qs = require("qs");
-
-//spotify credentials
-const credentials = require("./credentials.js");
+require("dotenv").config();
 
 // spotify authorization
 app.get("/authorize", function (req, res) {
@@ -24,7 +20,7 @@ app.get("/authorize", function (req, res) {
         "https://accounts.spotify.com/authorize" +
             "?response_type=code" +
             "&client_id=" +
-            credentials.clientID +
+            process.env.CLIENT_ID +
             (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
             "&redirect_uri=" +
             encodeURIComponent(redirect_url)
@@ -46,8 +42,8 @@ app.get("/callback", async (req, res) => {
             "Content-Type": "application/x-www-form-urlencoded",
         },
         auth: {
-            username: credentials.clientID,
-            password: credentials.clientSecret,
+            username: process.env.CLIENT_ID,
+            password: process.env.CLIENT_SECRET,
         },
     };
     const redirect_url = req.protocol + "://" + req.headers.host + "/callback";
