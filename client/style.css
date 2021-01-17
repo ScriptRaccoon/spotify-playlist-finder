@@ -78,7 +78,12 @@ main {
 }
 
 #welcome {
+    display: none;
     padding: 20px 0px;
+}
+
+#findBtn {
+    display: none;
 }
 
 .playlistContainer {
@@ -87,6 +92,7 @@ main {
     max-width: 600px;
     background-color: #192755;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .playlistName {
