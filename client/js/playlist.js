@@ -85,12 +85,13 @@ function showPlaylist(playlist) {
         .attr("id", playlist.id)
         .addClass("playlistContainer")
         .appendTo("#playlists");
+    const playlistHeader = $("<div></div>").appendTo(playlistContainer);
     const playlistName = $("<a></a>")
         .addClass("playlistName")
         .text(playlist.name)
         .attr("target", "_blank")
         .attr("href", playlist.external_urls.spotify)
-        .appendTo(playlistContainer);
+        .appendTo(playlistHeader);
     const playlistDescription = $("<small></small>")
         .addClass("playlistDescription")
         .text(playlist.description)

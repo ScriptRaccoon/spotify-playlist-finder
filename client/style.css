@@ -166,8 +166,11 @@ header {
 }
 
 #saveInfo {
+    text-align: justify;
     display: none;
+    font-size: 18px;
     line-height: 1.2;
+    padding: 10px 0px 0px 18px;
 }
 
 /* find playlists button */
@@ -197,7 +200,6 @@ header {
 
 .playlistName {
     color: var(--accent-color);
-    display: block;
     font-size: 25px;
 }
 
@@ -208,6 +210,7 @@ header {
 .playlistDescription {
     font-size: 16px;
     font-style: italic;
+    line-height: 1.2;
 }
 
 .trackContainer {
