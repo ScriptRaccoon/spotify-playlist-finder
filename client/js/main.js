@@ -41,3 +41,5 @@ $("#useId")
     .change(() => {
         $("#idContainer").slideToggle();
     });
+
+$(".fa-question-circle").click(() => $("#saveInfo").slideToggle());

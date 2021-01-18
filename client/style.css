@@ -126,6 +126,7 @@ header {
     margin: 0 auto;
     max-width: 400px;
     display: none;
+    position: relative;
 }
 
 .formControl {
@@ -152,6 +153,21 @@ header {
 #idContainer {
     display: none;
     text-align: center;
+}
+
+.fa-question-circle {
+    font-size: 14px;
+    transform: translateY(-3px);
+}
+
+.fa-question-circle:hover {
+    cursor: pointer;
+    color: var(--accent-color);
+}
+
+#saveInfo {
+    display: none;
+    line-height: 1.2;
 }
 
 /* find playlists button */
