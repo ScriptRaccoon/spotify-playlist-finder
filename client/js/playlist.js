@@ -97,7 +97,7 @@ export async function showPlaylists(options) {
         .addClass("summary")
         .appendTo("#playlists");
     const playlists = await getPlaylists(options);
-    let txt = `${playlists.length} playlists have been found`;
+    let txt = `${playlists.length} playlists have been found.`;
     if (!options.title) {
         txt += ". These are all of your playlists since you didn't specify a song title.";
     }
