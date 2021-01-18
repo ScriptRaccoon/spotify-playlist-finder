@@ -1,5 +1,9 @@
 /* global stuff */
 
+:root {
+    --font-color: #eaeaea;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +13,7 @@
 body {
     font-family: sans-serif;
     background-color: #050a1b;
-    color: #eaeaea;
+    color: var(--font-color);
 }
 
 /* general stuff */
@@ -58,7 +62,6 @@ header {
 /* main */
 
 main {
-    text-align: center;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0px 10px;
@@ -67,8 +70,9 @@ main {
 /* auth */
 
 .authForm {
-    margin-top: 100px;
+    margin-top: 50px;
     font-size: 20px;
+    text-align: center;
 }
 
 /* button styling */
@@ -93,6 +97,7 @@ main {
     display: none;
     padding: 20px 0px;
     font-weight: 300;
+    text-align: center;
 }
 
 /* find playlists button */
@@ -123,11 +128,19 @@ main {
 
 .playlistName {
     font-size: 20px;
-    margin: 10px 0px;
+    margin-top: 10px;
 }
 
 .playlistDescription {
     font-style: italic;
+}
+
+.trackContainer {
+    margin-top: 20px;
+}
+
+.track {
+    display: block;
 }
 
 /* form */
@@ -136,6 +149,7 @@ main {
     margin: 0 auto;
     max-width: 350px;
     display: none;
+    text-align: center;
 }
 
 .formControl {
@@ -153,5 +167,5 @@ main {
 }
 
 .formControl input[type="text"]:focus {
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--font-color);
 }

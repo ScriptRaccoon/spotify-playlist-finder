@@ -11,31 +11,46 @@ async function getPlaylists(options) {
             const data = await response.json();
             for (const playlist of data.items) {
                 const { id, name, description, external_urls } = playlist;
-                console.log(playlist);
                 let toAdd = true;
+                let relevantTracks = [];
                 if (options.title) {
                     const tracks = await getTracks(id);
                     if (options.case && options.exact) {
-                        toAdd = tracks.some((track) => track.name === options.title);
+                        relevantTracks = tracks.filter(
+                            (track) => track.name === options.title
+                        );
                     } else if (options.case && !options.exact) {
-                        toAdd = tracks.some((track) =>
+                        relevantTracks = tracks.filter((track) =>
                             track.name.includes(options.title)
                         );
                     } else if (!options.case && options.exact) {
-                        toAdd = tracks.some(
+                        relevantTracks = tracks.filter(
                             (track) =>
                                 track.name.toLowerCase() === options.title.toLowerCase()
                         );
                     } else if (!options.case && !options.exact) {
-                        toAdd = tracks.some((track) =>
+                        relevantTracks = tracks.filter((track) =>
                             track.name.toLowerCase().includes(options.title.toLowerCase())
                         );
                     }
+                    toAdd = relevantTracks.length > 0;
                 }
 
                 if (toAdd) {
-                    showPlaylist(playlist);
-                    playlists.push({ id, name, description, external_urls });
+                    showPlaylist({
+                        id,
+                        name,
+                        description,
+                        external_urls,
+                        relevantTracks,
+                    });
+                    playlists.push({
+                        id,
+                        name,
+                        description,
+                        external_urls,
+                        relevantTracks,
+                    });
                 }
             }
             url = data.next || null;
@@ -61,6 +76,17 @@ function showPlaylist(playlist) {
         .addClass("playlistDescription")
         .text(playlist.description)
         .appendTo(playlistContainer);
+    const trackContainer = $("<div></div>")
+        .addClass("trackContainer")
+        .appendTo(playlistContainer);
+    for (const track of playlist.relevantTracks) {
+        const artistNames = track.artists.map((x) => x.name).join(", ");
+        $("<a></a>")
+            .addClass("track")
+            .attr("href", track.external_urls.spotify)
+            .text(`${artistNames} - ${track.name}`)
+            .appendTo(trackContainer);
+    }
 }
 
 export async function showPlaylists(options) {
