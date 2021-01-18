@@ -5,8 +5,15 @@ $(() => {
     showCurrentUser();
 });
 
-$("#findBtn").click(async () => {
-    console.log("clicked!");
+$("#titleInput").keydown((e) => {
+    if (e.key === "Enter") {
+        makeRequest();
+    }
+});
+
+$("#findBtn").click(makeRequest);
+
+async function makeRequest() {
     const options = {
         title: $("#titleInput").val(),
         case: $("#caseInput").prop("checked"),
@@ -15,7 +22,7 @@ $("#findBtn").click(async () => {
     disableForm();
     await showPlaylists(options);
     enableForm();
-});
+}
 
 function disableForm() {
     $(".formControl input").prop("disabled", true).css("cursor", "not-allowed");

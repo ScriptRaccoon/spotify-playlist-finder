@@ -99,7 +99,7 @@ export async function showPlaylists(options) {
     const playlists = await getPlaylists(options);
     let txt = `${playlists.length} playlists have been found`;
     if (!options.title) {
-        txt += ". These are all your playlists since you didn't specify a title.";
+        txt += ". These are all of your playlists since you didn't specify a song title.";
     }
     summary.text(txt);
     return playlists;
