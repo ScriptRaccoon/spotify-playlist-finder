@@ -21,14 +21,14 @@ body {
     font-family: "Lato", sans-serif;
     background-color: var(--bg-color);
     color: var(--font-color);
-    line-height: 1.4;
+    line-height: 1.6;
     font-size: 20px;
 }
 
 main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0px 15px;
+    padding: 0px 20px;
 }
 
 /* general stuff */
@@ -87,9 +87,20 @@ header {
 /* auth */
 
 .authForm {
-    margin-top: 50px;
     font-size: 20px;
     text-align: center;
+}
+
+/* info */
+
+.info {
+    text-align: justify;
+    margin: 40px auto 80px auto;
+    max-width: 700px;
+}
+
+.info a {
+    color: var(--accent-color);
 }
 
 /* welcome message */
