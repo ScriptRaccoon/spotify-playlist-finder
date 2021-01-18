@@ -2,66 +2,81 @@ import { user_id } from "./user.js";
 import { headers } from "./token.js";
 import { getTracks } from "./tracks.js";
 
-async function getPlaylists(options) {
-    const playlists = [];
-    let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
-    try {
-        while (url) {
-            const response = await fetch(url, { headers });
-            const data = await response.json();
-            for (const playlist of data.items) {
-                const { id, name, description, external_urls } = playlist;
-                let toAdd = true;
-                let relevantTracks = [];
-                if (options.title) {
-                    const tracks = await getTracks(id);
-                    if (options.useId && options.id) {
-                        relevantTracks = tracks.filter(
-                            (track) => track.id === options.id
-                        );
-                    } else if (options.case && options.exact) {
-                        relevantTracks = tracks.filter(
-                            (track) => track.name === options.title
-                        );
-                    } else if (options.case && !options.exact) {
-                        relevantTracks = tracks.filter((track) =>
-                            track.name.includes(options.title)
-                        );
-                    } else if (!options.case && options.exact) {
-                        relevantTracks = tracks.filter(
-                            (track) =>
-                                track.name.toLowerCase() === options.title.toLowerCase()
-                        );
-                    } else if (!options.case && !options.exact) {
-                        relevantTracks = tracks.filter((track) =>
-                            track.name.toLowerCase().includes(options.title.toLowerCase())
-                        );
-                    }
-                    toAdd = relevantTracks.length > 0;
-                }
+let allPlaylists = null;
 
-                if (toAdd) {
-                    showPlaylist({
-                        id,
-                        name,
-                        description,
-                        external_urls,
-                        relevantTracks,
-                    });
-                    playlists.push({
-                        id,
-                        name,
-                        description,
-                        external_urls,
-                        relevantTracks,
-                    });
+async function getPlaylists(options) {
+    if (options.save && !allPlaylists) {
+        allPlaylists = [];
+        let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
+        try {
+            while (url) {
+                const response = await fetch(url, { headers });
+                const data = await response.json();
+                for (const playlist of data.items) {
+                    const { id, name, description, external_urls } = playlist;
+                    const tracks = await getTracks(id);
+                    allPlaylists.push({ id, name, description, external_urls, tracks });
+                    showRelevantTracksOfPlaylist(playlist, options, tracks);
                 }
+                url = data.next || null;
             }
-            url = data.next || null;
+        } catch (err) {
+            window.alert(err.message);
         }
-        return playlists;
-    } catch (err) {
-        window.alert(err.message);
+    } else if (options.save && allPlaylists) {
+        for (const playlist of allPlaylists) {
+            const { tracks } = playlist;
+            showRelevantTracksOfPlaylist(playlist, options, tracks);
+        }
+    } else {
+        allPlaylists = null;
+        let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
+        try {
+            while (url) {
+                const response = await fetch(url, { headers });
+                const data = await response.json();
+                for (const playlist of data.items) {
+                    showRelevantTracksOfPlaylist(playlist, options);
+                }
+                url = data.next || null;
+            }
+        } catch (err) {
+            window.alert(err.message);
+        }
+    }
+}
+
+async function showRelevantTracksOfPlaylist(playlist, options, tracks) {
+    const { id, name, description, external_urls } = playlist;
+    if (!tracks) {
+        tracks = await getTracks(id);
+    }
+    let relevantTracks = [];
+    if (options.title) {
+        if (options.useId && options.id) {
+            relevantTracks = tracks.filter((track) => track.id === options.id);
+        } else if (options.case && options.exact) {
+            relevantTracks = tracks.filter((track) => track.name === options.title);
+        } else if (options.case && !options.exact) {
+            relevantTracks = tracks.filter((track) => track.name.includes(options.title));
+        } else if (!options.case && options.exact) {
+            relevantTracks = tracks.filter(
+                (track) => track.name.toLowerCase() === options.title.toLowerCase()
+            );
+        } else if (!options.case && !options.exact) {
+            relevantTracks = tracks.filter((track) =>
+                track.name.toLowerCase().includes(options.title.toLowerCase())
+            );
+        }
+    }
+    if (relevantTracks.length > 0) {
+        showPlaylist({
+            id,
+            name,
+            description,
+            external_urls,
+            relevantTracks,
+        });
     }
 }
 
@@ -100,11 +115,6 @@ export async function showPlaylists(options) {
         .text(`Loading...`)
         .addClass("summary")
         .appendTo("#playlists");
-    const playlists = await getPlaylists(options);
-    let txt = `${playlists.length} playlists have been found.`;
-    if (!options.title) {
-        txt += ". These are all of your playlists since you didn't specify a song title.";
-    }
-    summary.text(txt);
-    return playlists;
+    await getPlaylists(options);
+    summary.text(`The following playlists have been found.`);
 }

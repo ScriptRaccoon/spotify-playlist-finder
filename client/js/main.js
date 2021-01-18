@@ -20,6 +20,7 @@ async function makeRequest() {
         exact: $("#exactInput").prop("checked"),
         useId: $("#useId").prop("checked"),
         id: $("#idInput").val(),
+        save: $("#saveInput").prop("checked"),
     };
     disableForm();
     await showPlaylists(options);
