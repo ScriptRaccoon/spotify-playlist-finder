@@ -75,4 +75,5 @@ export async function showPlaylists(options) {
         txt += ". These are all your playlists since you didn't specify a title.";
     }
     summary.text(txt);
+    return playlists;
 }
