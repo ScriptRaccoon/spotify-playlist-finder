@@ -18,6 +18,8 @@ async function makeRequest() {
         title: $("#titleInput").val(),
         case: $("#caseInput").prop("checked"),
         exact: $("#exactInput").prop("checked"),
+        useId: $("#useId").prop("checked"),
+        id: $("#idInput").val(),
     };
     disableForm();
     await showPlaylists(options);
@@ -33,3 +35,9 @@ function enableForm() {
     $(".formControl input").prop("disabled", false).css("cursor", "default");
     $("#findBtn").prop("disabled", false).css("opacity", 1).css("cursor", "pointer");
 }
+
+$("#useId")
+    .prop("checked", false)
+    .change(() => {
+        $("#idContainer").slideToggle();
+    });

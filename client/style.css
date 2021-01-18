@@ -116,7 +116,7 @@ header {
 
 .form {
     margin: 0 auto;
-    max-width: 350px;
+    max-width: 400px;
     display: none;
     text-align: center;
 }
@@ -140,6 +140,10 @@ header {
 
 .form input[type="checkbox"] {
     margin: 2px;
+}
+
+#idContainer {
+    display: none;
 }
 
 /* find playlists button */

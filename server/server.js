@@ -12,8 +12,6 @@ const axios = require("axios");
 const qs = require("qs");
 require("dotenv").config();
 
-console.log(process.env.REDIRECT_URI);
-
 // spotify authorization
 app.get("/authorize", function (req, res) {
     const scopes = "playlist-read-private playlist-read-collaborative";

@@ -34,7 +34,21 @@
                 <label for = "exactInput">
                     Exact match
                 </label>
-            </div>            
+            </div>
+            
+            <div class="formControl">
+                <input type="checkbox" id="useId"> 
+                <label for = "useId">
+                    Use song id instead
+                </label>
+            </div>  
+
+            <div class="formControl" id="idContainer">
+                <input type="text" id="idInput" placeholder="e.g. 5QRfoW5XLqBM2oCPRg2Sr7"> 
+                <label for = "idInput">
+                    Song id (is contained in the song's Spotify URI)
+                </label>
+            </div>  
             
             <input type="button" class="linkBtn" id="findBtn" value="List your playlists" />
         </section>

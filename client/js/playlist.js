@@ -15,7 +15,11 @@ async function getPlaylists(options) {
                 let relevantTracks = [];
                 if (options.title) {
                     const tracks = await getTracks(id);
-                    if (options.case && options.exact) {
+                    if (options.useId && options.id) {
+                        relevantTracks = tracks.filter(
+                            (track) => track.id === options.id
+                        );
+                    } else if (options.case && options.exact) {
                         relevantTracks = tracks.filter(
                             (track) => track.name === options.title
                         );
