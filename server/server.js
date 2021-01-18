@@ -12,10 +12,11 @@ const axios = require("axios");
 const qs = require("qs");
 require("dotenv").config();
 
+console.log(process.env.REDIRECT_URI);
+
 // spotify authorization
 app.get("/authorize", function (req, res) {
     const scopes = "playlist-read-private playlist-read-collaborative";
-    const redirect_url = req.protocol + "://" + req.headers.host + "/callback";
     res.redirect(
         "https://accounts.spotify.com/authorize" +
             "?response_type=code" +
@@ -23,7 +24,7 @@ app.get("/authorize", function (req, res) {
             process.env.CLIENT_ID +
             (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
             "&redirect_uri=" +
-            encodeURIComponent(redirect_url)
+            encodeURIComponent(process.env.REDIRECT_URI)
     );
 });
 
@@ -46,11 +47,10 @@ app.get("/callback", async (req, res) => {
             password: process.env.CLIENT_SECRET,
         },
     };
-    const redirect_url = req.protocol + "://" + req.headers.host + "/callback";
     const body = qs.stringify({
         grant_type: "authorization_code",
         code: req.query.code,
-        redirect_uri: redirect_url,
+        redirect_uri: process.env.REDIRECT_URI,
     });
     try {
         const response = await axios.post(url, body, headers);
