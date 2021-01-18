@@ -1,7 +1,14 @@
 /* global stuff */
 
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+
 :root {
     --font-color: #eaeaea;
+    --bg-color: #050a1b;
+    --button-color: rgb(12, 95, 12);
+    --button-hover-color: rgb(30, 146, 30);
+    --accent-color: yellow;
+    --lightgray-color: #668;
 }
 
 * {
@@ -11,9 +18,17 @@
 }
 
 body {
-    font-family: sans-serif;
-    background-color: #050a1b;
+    font-family: "Lato", sans-serif;
+    background-color: var(--bg-color);
     color: var(--font-color);
+    line-height: 1.4;
+    font-size: 20px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 15px;
 }
 
 /* general stuff */
@@ -24,55 +39,12 @@ input {
     color: inherit;
     border: none;
     outline: none;
+    transition: all 100ms linear;
 }
 
 a {
     text-decoration: none;
     color: inherit;
-}
-
-/* nav */
-
-nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    padding: 20px;
-}
-
-/* header */
-
-header {
-    text-align: center;
-}
-
-.title {
-    font-size: 50px;
-    font-weight: 300;
-    padding: 50px 0px 20px 0px;
-    letter-spacing: 1px;
-}
-
-.subtitle {
-    font-size: 20px;
-    padding: 10px 0px;
-    opacity: 0.6;
-}
-
-/* main */
-
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0px 10px;
-}
-
-/* auth */
-
-.authForm {
-    margin-top: 50px;
-    font-size: 20px;
-    text-align: center;
 }
 
 /* button styling */
@@ -83,64 +55,50 @@ main {
     font-size: 25px;
     cursor: pointer;
     margin: 15px;
-    background-color: rgb(12, 95, 12);
-    transition: all 100ms linear;
+    background-color: var(--button-color);
 }
 
 .linkBtn:hover {
-    background-color: rgb(30, 146, 30);
+    background-color: var(--button-hover-color);
+}
+
+/* nav */
+
+nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    z-index: 10;
+}
+
+/* header */
+
+header {
+    text-align: center;
+}
+
+.title {
+    font-size: 50px;
+    padding: 50px 0px 20px 0px;
+    letter-spacing: 1px;
+}
+
+/* auth */
+
+.authForm {
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
 }
 
 /* welcome message */
 
 #welcome {
     display: none;
-    padding: 20px 0px;
-    font-weight: 300;
+    margin: 50px 0px 20px 0px;
     text-align: center;
-}
-
-/* find playlists button */
-
-#findBtn {
-    display: none;
-}
-
-/* playlist display */
-
-#playlists {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.summary {
-    padding: 20px 0px;
-}
-
-.playlistContainer {
-    display: block;
-    margin: 20px 0px;
-    padding: 20px;
-    background-color: #192755;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.playlistName {
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-.playlistDescription {
-    font-style: italic;
-}
-
-.trackContainer {
-    margin-top: 20px;
-}
-
-.track {
-    display: block;
+    color: var(--accent-color);
 }
 
 /* form */
@@ -156,16 +114,72 @@ main {
     margin: 20px 0px;
 }
 
-.formControl input[type="text"] {
+.form input[type="text"] {
     text-align: center;
-    padding: 10px;
-    margin-bottom: 4px;
+    padding: 5px;
+    margin-bottom: 3px;
     width: 100%;
     background-color: transparent;
-    border-bottom: 1px solid #555;
-    transition: all 100ms linear;
+    border-bottom: 1px solid var(--lightgray-color);
 }
 
-.formControl input[type="text"]:focus {
+.form input[type="text"]:focus {
     border-bottom: 1px solid var(--font-color);
+}
+
+.form input[type="checkbox"] {
+    margin: 2px;
+}
+
+/* find playlists button */
+
+#findBtn {
+    display: none;
+}
+
+/* playlist display */
+
+#playlists {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.summary {
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.playlistContainer {
+    margin: 20px 0px;
+    padding: 20px;
+    border-bottom: 1px solid var(--lightgray-color);
+}
+
+.playlistName {
+    color: var(--accent-color);
+    display: block;
+    font-size: 25px;
+}
+
+.playlistName:hover {
+    opacity: 0.8;
+}
+
+.playlistDescription {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.trackContainer {
+    margin: 20px 0px 0px 25px;
+}
+
+.track {
+    color: var(--button-color);
+    margin: 5px 0px;
+    display: block;
+}
+
+.track:hover {
+    color: var(--button-hover-color);
 }

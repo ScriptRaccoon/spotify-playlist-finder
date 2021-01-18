@@ -12,31 +12,28 @@
     </nav>
     <header>
         <h1 class="title">Spotify Playlist Finder</h1>
-        <small class="subtitle">Find all your playlists which contain a specific song</small>
+        <h2 class="subtitle">Find all your playlists which contain a specific song</h2>
     </header>
     <main>
-        <h2 id="welcome">Hi, <span id="user_name"></span></h2>
+        <h2 id="welcome">Hi <span id="user_name"></span>!</h2>
 
         <section id="form" class="form">
             <div class="formControl">
-                <input type="text" id="titleInput">
-                <small>
-                    Specify the song title
-                </small>
+                <input type="text" id="titleInput" placeholder="Choose a song title">
             </div>
 
             <div class="formControl">
                 <input type="checkbox" id="caseInput"> 
-                <small>
+                <label for = caseInput>
                     Case-sensitive search
-                </small>
+                </label>
             </div>
 
             <div class="formControl">
                 <input type="checkbox" id="exactInput"> 
-                <small>
+                <label for = "exactInput">
                     Exact match
-                </small>
+                </label>
             </div>            
             
             <input type="button" class="linkBtn" id="findBtn" value="List your playlists" />

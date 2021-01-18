@@ -62,30 +62,30 @@ async function getPlaylists(options) {
 }
 
 function showPlaylist(playlist) {
-    const playlistContainer = $("<a></a>")
+    const playlistContainer = $("<div></div>")
         .attr("id", playlist.id)
-        .attr("href", playlist.external_urls.spotify)
         .attr("target", "_blank")
         .addClass("playlistContainer")
         .appendTo("#playlists");
-    const playlistName = $("<div></div>")
+    const playlistName = $("<a></a>")
         .addClass("playlistName")
         .text(playlist.name)
+        .attr("href", playlist.external_urls.spotify)
         .appendTo(playlistContainer);
     const playlistDescription = $("<small></small>")
         .addClass("playlistDescription")
         .text(playlist.description)
         .appendTo(playlistContainer);
-    const trackContainer = $("<div></div>")
+    const trackContainer = $("<ul></ul>")
         .addClass("trackContainer")
         .appendTo(playlistContainer);
     for (const track of playlist.relevantTracks) {
         const artistNames = track.artists.map((x) => x.name).join(", ");
-        $("<a></a>")
+        const link = $("<a></a>")
             .addClass("track")
             .attr("href", track.external_urls.spotify)
-            .text(`${artistNames} - ${track.name}`)
-            .appendTo(trackContainer);
+            .text(`${artistNames} – ${track.name}`)
+        $("<li></li>").append(link).appendTo(trackContainer);
     }
 }
 
