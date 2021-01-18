@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotify Playlist Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <div><a href="/">Home</a></div>
+        <div><a href="/"><i class="fas fa-home" title="Home"></i></a></div>
     </nav>
     <header>
         <h1 class="title">Spotify Playlist Finder</h1>
@@ -46,11 +47,14 @@
             <div class="formControl" id="idContainer">
                 <input type="text" id="idInput" placeholder="e.g. 5QRfoW5XLqBM2oCPRg2Sr7"> 
                 <label for = "idInput">
-                    Song id (is contained in the song's Spotify URI)
+                    Song id – check the song's Spotify URI
                 </label>
-            </div>  
+            </div>
             
-            <input type="button" class="linkBtn" id="findBtn" value="List your playlists" />
+            <div class="centered">
+                <input type="button" class="linkBtn" id="findBtn" value="Find your playlists" />
+            </div>            
+            
         </section>
 
         <section id="playlists">            

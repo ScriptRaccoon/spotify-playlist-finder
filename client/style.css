@@ -9,6 +9,7 @@
     --button-hover-color: rgb(30, 146, 30);
     --accent-color: yellow;
     --lightgray-color: #668;
+    --secondary-accent-color: orange;
 }
 
 * {
@@ -47,6 +48,10 @@ a {
     color: inherit;
 }
 
+.centered {
+    text-align: center;
+}
+
 /* button styling */
 
 .linkBtn {
@@ -68,8 +73,12 @@ nav {
     position: fixed;
     top: 0;
     right: 0;
-    padding: 20px;
+    padding: 10px 20px;
     z-index: 10;
+}
+
+nav i:hover {
+    color: var(--accent-color);
 }
 
 /* header */
@@ -87,7 +96,6 @@ header {
 /* auth */
 
 .authForm {
-    font-size: 20px;
     text-align: center;
 }
 
@@ -118,7 +126,6 @@ header {
     margin: 0 auto;
     max-width: 400px;
     display: none;
-    text-align: center;
 }
 
 .formControl {
@@ -144,12 +151,14 @@ header {
 
 #idContainer {
     display: none;
+    text-align: center;
 }
 
 /* find playlists button */
 
 #findBtn {
     display: none;
+    left: 50%;
 }
 
 /* playlist display */
@@ -190,11 +199,11 @@ header {
 }
 
 .track {
-    color: var(--button-color);
+    color: var(--secondary-accent-color);
     margin: 5px 0px;
     display: block;
 }
 
 .track:hover {
-    color: var(--button-hover-color);
+    color: var(--accent-color);
 }
