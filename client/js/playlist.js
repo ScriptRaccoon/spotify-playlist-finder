@@ -106,7 +106,7 @@ function showPlaylist(playlist) {
             .attr("target", "_blank")
             .attr("href", track.external_urls.spotify)
             .text(`${artistNames} – ${track.name}`);
-        $("<li></li>").append(link).appendTo(trackContainer);
+        $("<li></li>").append(link).addClass("trackListing").appendTo(trackContainer);
     }
 }
 
