@@ -112,10 +112,9 @@ function showPlaylist(playlist) {
 
 export async function showPlaylists(options) {
     $("#playlists").html("");
-    const summary = $("<div></div>")
-        .text(`Loading...`)
-        .addClass("summary")
-        .appendTo("#playlists");
+    const spinner = $("<div></div>").addClass("spinner").appendTo("#playlists");
+    const summary = $("<div></div>").addClass("summary").appendTo("#playlists").hide();
     await getPlaylists(options);
-    summary.text(`The following playlists have been found.`);
+    spinner.remove();
+    summary.show().text(`The following playlists have been found.`);
 }
