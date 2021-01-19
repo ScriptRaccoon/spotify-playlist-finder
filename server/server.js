@@ -53,12 +53,56 @@ app.get("/callback", async (req, res) => {
     try {
         const response = await axios.post(url, body, headers);
         if (response.status == 200) {
-            const token = response["data"]["access_token"];
-            res.redirect(`/finder.html?token=${token}`);
+            const { access_token, refresh_token, expires_in } = response["data"];
+            // console.log(ccess_token, refresh_token, expires_in);
+            res.redirect(
+                `/finder.html?access_token=${access_token}&refresh_token=${refresh_token}&expires_in=${expires_in}`
+            );
         } else {
             res.send(`Error: ${response.status}`);
         }
     } catch (err) {
-        res.redirect(`Error: ${err.message}`);
+        res.send(`Error: ${err.message}`);
+    }
+});
+
+// get a new access token
+app.get("/newtoken", async (req, res) => {
+    const refresh_token = req.query.token;
+    if (!refresh_token) {
+        res.redirect("/");
+        return;
+    }
+    const url = "https://accounts.spotify.com/api/token";
+    const headers = {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        auth: {
+            username: process.env.CLIENT_ID,
+            password: process.env.CLIENT_SECRET,
+        },
+    };
+    const body = qs.stringify({
+        grant_type: "refresh_token",
+        refresh_token: refresh_token,
+    });
+    try {
+        const response = await axios.post(url, body, headers);
+        if (response.status == 200) {
+            const { access_token, refresh_token } = response["data"];
+            if (refresh_token) {
+                res.redirect(
+                    `/finder.html?access_token=${access_token}&refresh_token=${refresh_token}`
+                );
+            } else {
+                res.redirect(`/finder.html?access_token=${access_token}`);
+            }
+        } else {
+            res.send(`Error: ${response.status}`);
+        }
+    } catch (err) {
+        res.send(`Error: ${err.message}`);
     }
 });
