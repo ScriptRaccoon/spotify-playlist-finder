@@ -46,6 +46,6 @@ $("#useId")
 $(".fa-question-circle").click(() => $("#saveInfo").slideToggle());
 
 $(".fa-home").click(() => {
-    sessionStorage.removeItem("access_token");
+    sessionStorage.clear();
     window.location.href = "/";
 });

@@ -102,7 +102,7 @@ header {
 
 /* auth */
 
-.authForm {
+#authForm {
     text-align: center;
     margin-bottom: 20px;
 }

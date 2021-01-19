@@ -53,9 +53,10 @@ app.get("/callback", async (req, res) => {
     try {
         const response = await axios.post(url, body, headers);
         if (response.status == 200) {
-            const { access_token, refresh_token, expires_in } = response["data"];
+            const { access_token, expires_in } = response["data"];
+            const expire_time = new Date().getTime() + parseInt(expires_in) * 1000;
             res.redirect(
-                `/finder.html?access_token=${access_token}&refresh_token=${refresh_token}&expires_in=${expires_in}`
+                `/finder.html?access_token=${access_token}&expire_time=${expire_time}`
             );
         } else {
             res.send(`Error: ${response.status}`);
@@ -65,7 +66,7 @@ app.get("/callback", async (req, res) => {
     }
 });
 
-// get a new access token
+// get a new access token (not needed right now)
 app.get("/newtoken", async (req, res) => {
     const refresh_token = req.query.token;
     if (!refresh_token) {
