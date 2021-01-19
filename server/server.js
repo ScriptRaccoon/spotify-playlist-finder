@@ -54,7 +54,6 @@ app.get("/callback", async (req, res) => {
         const response = await axios.post(url, body, headers);
         if (response.status == 200) {
             const { access_token, refresh_token, expires_in } = response["data"];
-            // console.log(ccess_token, refresh_token, expires_in);
             res.redirect(
                 `/finder.html?access_token=${access_token}&refresh_token=${refresh_token}&expires_in=${expires_in}`
             );

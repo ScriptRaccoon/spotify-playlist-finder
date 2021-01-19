@@ -12,3 +12,7 @@ if (expires_in && refresh_token) {
         window.location.href = `/newtoken?token=${refresh_token}`;
     }, 1000 * parseInt(expires_in));
 }
+
+if (access_token) {
+    sessionStorage.setItem("access_token", access_token);
+}
