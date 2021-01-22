@@ -7,6 +7,7 @@
     --bg-color: #050a1b;
     --button-color: rgb(12, 95, 12);
     --button-hover-color: rgb(30, 146, 30);
+    --title-color: rgb(45, 177, 45);
     --accent-color: yellow;
     --lightgray-color: #668;
     --secondary-accent-color: orange;
@@ -23,7 +24,7 @@ body {
     background-color: var(--bg-color);
     color: var(--font-color);
     line-height: 1.6;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 main {
@@ -56,11 +57,13 @@ a {
 
 .linkBtn {
     display: inline-block;
-    padding: 20px 40px;
-    font-size: 25px;
+    padding: 15px 30px;
+    font-size: 20px;
     cursor: pointer;
     margin: 15px;
+    border-radius: 2px;
     background-color: var(--button-color);
+    box-shadow: 0px 0px 4px rgb(255, 255, 255, 0.2);
 }
 
 .linkBtn:hover {
@@ -88,14 +91,19 @@ header {
 }
 
 .title {
-    font-size: 50px;
+    font-size: 40px;
     padding: 50px 0px 20px 0px;
     letter-spacing: 1px;
     line-height: 1.2;
+    color: var(--title-color);
 }
 
 .subtitle {
+    font-size: 24px;
     line-height: 1.2;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    font-weight: 400;
 }
 
 /* auth */
@@ -168,6 +176,7 @@ label[for="idInput"] {
 
 .fa-question-circle {
     font-size: 14px;
+    margin-left: 2px;
     transform: translateY(-3px);
 }
 
