@@ -2,35 +2,43 @@ import { user_id } from "./user.js";
 import { headers } from "./token.js";
 import { getTracks } from "./tracks.js";
 
-let allPlaylists = null;
-
 async function getPlaylists(options) {
-    if (options.save && !allPlaylists) {
-        allPlaylists = [];
-        let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
-        try {
-            while (url) {
-                const response = await fetch(url, { headers });
-                const data = await response.json();
-                for (const playlist of data.items) {
-                    const { id, name, description, external_urls } = playlist;
-                    const tracks = await getTracks(id);
-                    allPlaylists.push({ id, name, description, external_urls, tracks });
-                    showRelevantTracksOfPlaylist(playlist, options, tracks);
-                }
-                url = data.next || null;
+    if (options.save) {
+        const storedPlaylists = await localforage.getItem("storedPlaylists");
+        if (storedPlaylists) {
+            for (const playlist of storedPlaylists) {
+                const { tracks } = playlist;
+                showRelevantTracksOfPlaylist(playlist, options, tracks);
             }
-        } catch (err) {
-            console.error(err.message);
-            window.alert(err.message);
-        }
-    } else if (options.save && allPlaylists) {
-        for (const playlist of allPlaylists) {
-            const { tracks } = playlist;
-            showRelevantTracksOfPlaylist(playlist, options, tracks);
+        } else {
+            const allPlaylists = [];
+            let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
+            try {
+                while (url) {
+                    const response = await fetch(url, { headers });
+                    const data = await response.json();
+                    for (const playlist of data.items) {
+                        const { id, name, description, external_urls } = playlist;
+                        const tracks = await getTracks(id);
+                        allPlaylists.push({
+                            id,
+                            name,
+                            description,
+                            external_urls,
+                            tracks,
+                        });
+                        showRelevantTracksOfPlaylist(playlist, options, tracks);
+                    }
+                    url = data.next || null;
+                }
+                await localforage.setItem("storedPlaylists", allPlaylists);
+            } catch (err) {
+                console.error(err.message);
+                window.alert(err.message);
+            }
         }
     } else {
-        allPlaylists = null;
+        await localforage.removeItem("storedPlaylists");
         let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
         try {
             while (url) {
