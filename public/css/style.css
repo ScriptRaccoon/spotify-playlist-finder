@@ -9,7 +9,7 @@
     --button-hover-color: rgb(30, 146, 30);
     --title-color: rgb(45, 177, 45);
     --accent-color: yellow;
-    --lightgray-color: #668;
+    --lightgray-color: #14214d;
     --secondary-accent-color: orange;
 }
 
@@ -28,7 +28,7 @@ body {
 }
 
 main {
-    max-width: 1200px;
+    max-width: 720px;
     margin: 0 auto;
     padding: 0px 20px;
 }
@@ -149,7 +149,7 @@ label[for="idInput"] {
 }
 
 .formControl {
-    margin: 20px 0px;
+    padding: 10px 0px;
 }
 
 .form input[type="text"] {
@@ -226,8 +226,6 @@ label[for="idInput"] {
 /* playlist display */
 
 #playlists {
-    max-width: 800px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     position: relative;
