@@ -5,12 +5,32 @@ const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
-app.use(express.static("client"));
+
+// middleware for static files
+app.use(express.static("public"));
+
+// use view engine ejs
+app.set("views", "views");
+app.set("view engine", "ejs");
 
 // various packages
 const axios = require("axios");
 const qs = require("qs");
 require("dotenv").config();
+
+// main route
+app.get("/", function (req, res) {
+    res.render("index");
+});
+
+// finder route
+app.get("/finder", function (req, res) {
+    if (!req.query.access_token) {
+        res.send(`Error: No access token provided`);
+    } else {
+        res.render("finder", { query: req.query });
+    }
+});
 
 // spotify authorization
 app.get("/authorize", function (req, res) {
@@ -32,8 +52,11 @@ app.get("/callback", async (req, res) => {
         res.send(`Error: ${req.query.error}`);
         return;
     }
-    if (!req.query.code) return;
-
+    if (!req.query.code) {
+        res.send(`Error: No code provided`);
+        res.end();
+        return;
+    }
     const url = "https://accounts.spotify.com/api/token";
     const headers = {
         headers: {
@@ -56,7 +79,7 @@ app.get("/callback", async (req, res) => {
             const { access_token, expires_in } = response["data"];
             const expire_time = new Date().getTime() + parseInt(expires_in) * 1000;
             res.redirect(
-                `/finder.html?access_token=${access_token}&expire_time=${expire_time}`
+                `/finder?access_token=${access_token}&expire_time=${expire_time}`
             );
         } else {
             res.send(`Error: ${response.status}`);

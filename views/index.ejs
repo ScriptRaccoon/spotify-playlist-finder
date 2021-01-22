@@ -1,0 +1,26 @@
+
+<%- include("./header.ejs") %>
+
+<div class="info">
+    It's surprising that Spotify does not offer this functionality on its own.
+    As of 2021, you can only search within your library, i.e. your saved songs,
+    within a specific playlist, and of course globally as well.
+    A search within all of your saved playlists has been posted as a
+    <a href="https://community.spotify.com/t5/Live-Ideas/Your-Library-Search-within-all-Playlists/idi-p/1558149">feature request</a>,
+    but has not been implemented yet. This feature is useful, for example to find possible duplicates.
+    <br><br>
+    This is why I created this little search tool. It is <a href="https://github.com/ScriptRaccoon/spotify-playlist-finder" target="_blank">open source</a> and uses the <a href="https://developer.spotify.com/documentation/" target="_blank">Spotify Web API</a>.
+</div>
+
+<section id="authForm">
+    <div>
+        Please authorize this app to read your Spotify playlists first.
+    </div>
+    <div>
+       <a role="button" class="linkBtn" href="/authorize" id="authBtn">Authorize</a>
+    </div>
+</section>
+
+<script src="./js/auth.js"></script>
+
+<%- include("./footer.ejs") %>
