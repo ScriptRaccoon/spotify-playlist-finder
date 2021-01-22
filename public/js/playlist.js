@@ -21,6 +21,7 @@ async function getPlaylists(options) {
                 url = data.next || null;
             }
         } catch (err) {
+            console.error(err.message);
             window.alert(err.message);
         }
     } else if (options.save && allPlaylists) {
@@ -41,6 +42,7 @@ async function getPlaylists(options) {
                 url = data.next || null;
             }
         } catch (err) {
+            console.error(err.message);
             window.alert(err.message);
         }
     }

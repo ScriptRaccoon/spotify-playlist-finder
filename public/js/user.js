@@ -11,6 +11,7 @@ async function getCurrentUser() {
         user_id = data["id"];
         return { user_name, user_id };
     } catch (err) {
+        console.error(err.message);
         window.alert(err.message);
         return null;
     }

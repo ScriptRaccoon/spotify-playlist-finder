@@ -12,13 +12,16 @@ export async function getTracks(playlistId) {
             }
             const trackItems = data.items;
             trackItems.forEach((item) => {
-                const { name, id, artists, external_urls } = item.track;
-                tracks.push({ name, id, artists, external_urls });
+                if (item.track) {
+                    const { name, id, artists, external_urls } = item.track;
+                    tracks.push({ name, id, artists, external_urls });
+                }
             });
             url = data.next || null;
         }
         return tracks;
     } catch (err) {
+        console.error(err.message);
         window.alert(err.message);
         return [];
     }
