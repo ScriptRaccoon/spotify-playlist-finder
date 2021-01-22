@@ -126,5 +126,12 @@ export async function showPlaylists(options) {
     const spinner = $("<div></div>").addClass("spinner").appendTo("#playlists");
     await getPlaylists(options);
     spinner.remove();
-    summary.text(`The following playlists have been found.`);
+    const numberOfPlaylists = $(".playlistName").length;
+    if (numberOfPlaylists === 0) {
+        summary.text(`No playlist has been found.`);
+    } else if (numberOfPlaylists === 1) {
+        summary.text(`One playlist has been found.`);
+    } else {
+        summary.text(`The following ${numberOfPlaylists} playlists have been found.`);
+    }
 }
