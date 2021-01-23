@@ -104,13 +104,13 @@ function showPlaylist(playlist) {
     const playlistHeader = $("<div></div>").appendTo(playlistContainer);
     const playlistName = $("<a></a>")
         .addClass("playlistName")
-        .text(playlist.name)
+        .html(playlist.name)
         .attr("target", "_blank")
         .attr("href", playlist.external_urls.spotify)
         .appendTo(playlistHeader);
     const playlistDescription = $("<small></small>")
         .addClass("playlistDescription")
-        .text(playlist.description)
+        .html(playlist.description)
         .appendTo(playlistContainer);
     const trackContainer = $("<ul></ul>")
         .addClass("trackContainer")
@@ -121,7 +121,7 @@ function showPlaylist(playlist) {
             .addClass("track")
             .attr("target", "_blank")
             .attr("href", track.external_urls.spotify)
-            .text(`${artistNames} – ${track.name}`);
+            .html(`${artistNames} – ${track.name}`);
         $("<li></li>").append(link).addClass("trackListing").appendTo(trackContainer);
     }
 }
