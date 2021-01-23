@@ -133,11 +133,8 @@ export async function showPlaylists(options) {
     await getPlaylists(options);
     spinner.remove();
     const numberOfPlaylists = $(".playlistName").length;
-    if (numberOfPlaylists === 0) {
-        summary.text(`No playlist has been found.`);
-    } else if (numberOfPlaylists === 1) {
-        summary.text(`One playlist has been found.`);
-    } else {
-        summary.text(`The following ${numberOfPlaylists} playlists have been found.`);
-    }
+    const numberOfTracks = $(".track").length;
+    summary.text(
+        `${numberOfTracks} tracks in ${numberOfPlaylists} playlists have been found.`
+    );
 }
