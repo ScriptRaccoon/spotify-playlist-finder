@@ -1,5 +1,7 @@
 import { headers } from "./token.js";
 
+const sleep = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export async function getTracks(playlistId) {
     const tracks = [];
     let url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;

@@ -8,7 +8,7 @@ async function getPlaylists(options) {
         if (storedPlaylists) {
             for (const playlist of storedPlaylists) {
                 const { tracks } = playlist;
-                showRelevantTracksOfPlaylist(playlist, options, tracks);
+                await showRelevantTracksOfPlaylist(playlist, options, tracks);
             }
         } else {
             const allPlaylists = [];
@@ -17,6 +17,9 @@ async function getPlaylists(options) {
                 while (url) {
                     const response = await fetch(url, { headers });
                     const data = await response.json();
+                    if (data.error) {
+                        throw new Error(data.error.status + ": " + data.error.message);
+                    }
                     for (const playlist of data.items) {
                         const { id, name, description, external_urls } = playlist;
                         const tracks = await getTracks(id);
@@ -27,7 +30,7 @@ async function getPlaylists(options) {
                             external_urls,
                             tracks,
                         });
-                        showRelevantTracksOfPlaylist(playlist, options, tracks);
+                        await showRelevantTracksOfPlaylist(playlist, options, tracks);
                     }
                     url = data.next || null;
                 }
@@ -44,8 +47,11 @@ async function getPlaylists(options) {
             while (url) {
                 const response = await fetch(url, { headers });
                 const data = await response.json();
+                if (data.error) {
+                    throw new Error(data.error.status + ": " + data.error.message);
+                }
                 for (const playlist of data.items) {
-                    showRelevantTracksOfPlaylist(playlist, options);
+                    await showRelevantTracksOfPlaylist(playlist, options);
                 }
                 url = data.next || null;
             }
