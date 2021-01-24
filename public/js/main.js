@@ -6,7 +6,7 @@ $(async () => {
     const storedPlaylists = await localforage.getItem("storedPlaylists");
     if (storedPlaylists) {
         $("#deleteBtn").show();
-        $("#snapShotControls").css("display", "flex");
+        $("#snapShotControls").show().css("display", "flex");
     }
 });
 
