@@ -193,6 +193,24 @@ label[for="idInput"] {
     padding: 10px 0px 0px 18px;
 }
 
+#snapShotControls {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+#deleteBtn {
+    display: none;
+    margin: 0;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+#deleteInfo {
+    display: none;
+}
+
 /* find playlists button */
 
 #findBtn {

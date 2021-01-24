@@ -46,15 +46,19 @@
         <input type="checkbox" id="saveInput" checked> 
         <span>
             <label for = "saveInput">
-                Save playlists
+                Remember playlists
             </label>
             <i class="fas fa-question-circle"></i>
         </span>
         <div id="saveInfo">
-            This means that your playlists and their tracks are saved on your device
+            This means that a snapshot of your playlists is saved on your device
             during the first search, so that every search after that will be
             <i>much</i> faster. However, any changes in your playlists in the meantime
-            are ignored. Simply uncheck the box for a new snapshot of your playlists.
+            are ignored.
+            <div id="snapShotControls">
+                <input type="button" class="linkBtn" id="deleteBtn" value="Delete snapshot">
+                <span id="deleteInfo"></span>
+            </div>            
         </div>
     </div>
     

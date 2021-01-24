@@ -35,13 +35,14 @@ async function getPlaylists(options) {
                     url = data.next || null;
                 }
                 await localforage.setItem("storedPlaylists", allPlaylists);
+                $("#snapShotControls").show().css("display", "flex");
+                $("#deleteBtn").show();
             } catch (err) {
                 console.error(err.message);
                 window.alert(err.message);
             }
         }
     } else {
-        await localforage.removeItem("storedPlaylists");
         let url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
         try {
             while (url) {

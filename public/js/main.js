@@ -1,8 +1,13 @@
 import { showCurrentUser } from "./user.js";
 import { showPlaylists } from "./playlist.js";
 
-$(() => {
-    showCurrentUser();
+$(async () => {
+    await showCurrentUser();
+    const storedPlaylists = await localforage.getItem("storedPlaylists");
+    if (storedPlaylists) {
+        $("#deleteBtn").show();
+        $("#snapShotControls").css("display", "flex");
+    }
 });
 
 $("#titleInput").keydown((e) => {
@@ -29,12 +34,12 @@ async function makeRequest() {
 
 function disableForm() {
     $(".formControl input").prop("disabled", true).css("cursor", "not-allowed");
-    $("#findBtn").prop("disabled", true).css("opacity", 0.5).css("cursor", "not-allowed");
+    $(".linkBtn").prop("disabled", true).css("opacity", 0.5).css("cursor", "not-allowed");
 }
 
 function enableForm() {
     $(".formControl input").prop("disabled", false).css("cursor", "default");
-    $("#findBtn").prop("disabled", false).css("opacity", 1).css("cursor", "pointer");
+    $(".linkBtn").prop("disabled", false).css("opacity", 1).css("cursor", "pointer");
 }
 
 $("#useId")
@@ -44,6 +49,21 @@ $("#useId")
     });
 
 $(".fa-question-circle").click(() => $("#saveInfo").slideToggle());
+
+$("#deleteBtn").click(async () => {
+    await localforage.removeItem("storedPlaylists");
+    $("#deleteBtn").fadeOut("fast", () => {
+        $("#deleteInfo")
+            .text("Snapshot is deleted")
+            .fadeIn("fast", () => {
+                $("#snapShotControls")
+                    .delay(2000)
+                    .slideUp(() => {
+                        $("#deleteInfo").hide().text("");
+                    });
+            });
+    });
+});
 
 $(".fa-home").click(() => {
     sessionStorage.clear();
