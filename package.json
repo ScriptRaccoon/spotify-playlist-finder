@@ -1,20 +1,20 @@
 {
-  "name": "spotify-playlist-finder",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./server/server.js",
-  "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Script Raccoon",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^1.14.0",
-    "dotenv": "^17.3.1",
-    "ejs": "^5.0.1",
-    "express": "^5.2.1",
-    "qs": "^6.15.0"
-  }
+	"name": "spotify-playlist-finder",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./server/server.js",
+	"scripts": {
+		"dev": "nodemon server.js",
+		"start": "node server.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Script Raccoon",
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^1.14.0",
+		"dotenv": "^17.3.1",
+		"ejs": "^5.0.1",
+		"express": "^5.2.1",
+		"qs": "^6.15.0"
+	}
 }

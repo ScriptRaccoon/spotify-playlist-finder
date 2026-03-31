@@ -1,298 +1,298 @@
 /* global stuff */
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
 :root {
-    --font-color: #eaeaea;
-    --bg-color: #050a1b;
-    --button-color: rgb(12, 95, 12);
-    --button-hover-color: rgb(30, 146, 30);
-    --title-color: rgb(45, 177, 45);
-    --accent-color: yellow;
-    --lightgray-color: #14214d;
-    --secondary-accent-color: orange;
+	--font-color: #eaeaea;
+	--bg-color: #050a1b;
+	--button-color: rgb(12, 95, 12);
+	--button-hover-color: rgb(30, 146, 30);
+	--title-color: rgb(45, 177, 45);
+	--accent-color: yellow;
+	--lightgray-color: #14214d;
+	--secondary-accent-color: orange;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-    font-family: "Lato", sans-serif;
-    background-color: var(--bg-color);
-    color: var(--font-color);
-    line-height: 1.6;
-    font-size: 18px;
+	font-family: 'Lato', sans-serif;
+	background-color: var(--bg-color);
+	color: var(--font-color);
+	line-height: 1.6;
+	font-size: 18px;
 }
 
 main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0px 20px;
+	max-width: 720px;
+	margin: 0 auto;
+	padding: 0px 20px;
 }
 
 /* general stuff */
 
 input {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    border: none;
-    outline: none;
-    transition: all 100ms linear;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	border: none;
+	outline: none;
+	transition: all 100ms linear;
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+	text-decoration: none;
+	color: inherit;
 }
 
 .centered {
-    text-align: center;
+	text-align: center;
 }
 
 /* button styling */
 
 .linkBtn {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 20px;
-    cursor: pointer;
-    margin: 15px;
-    border-radius: 2px;
-    background-color: var(--button-color);
-    box-shadow: 0px 0px 4px rgb(255, 255, 255, 0.2);
+	display: inline-block;
+	padding: 15px 30px;
+	font-size: 20px;
+	cursor: pointer;
+	margin: 15px;
+	border-radius: 2px;
+	background-color: var(--button-color);
+	box-shadow: 0px 0px 4px rgb(255, 255, 255, 0.2);
 }
 
 .linkBtn:hover {
-    background-color: var(--button-hover-color);
+	background-color: var(--button-hover-color);
 }
 
 /* nav */
 
 nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px 20px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 10px 20px;
 }
 
 nav i:hover {
-    cursor: pointer;
-    color: var(--accent-color);
+	cursor: pointer;
+	color: var(--accent-color);
 }
 
 /* header */
 
 header {
-    text-align: center;
+	text-align: center;
 }
 
 .title {
-    font-size: 40px;
-    padding: 50px 0px 20px 0px;
-    letter-spacing: 1px;
-    line-height: 1.2;
-    color: var(--title-color);
+	font-size: 40px;
+	padding: 50px 0px 20px 0px;
+	letter-spacing: 1px;
+	line-height: 1.2;
+	color: var(--title-color);
 }
 
 .subtitle {
-    font-size: 24px;
-    line-height: 1.2;
-    letter-spacing: 1px;
-    opacity: 0.8;
-    font-weight: 400;
+	font-size: 24px;
+	line-height: 1.2;
+	letter-spacing: 1px;
+	opacity: 0.8;
+	font-weight: 400;
 }
 
 /* auth */
 
 #authForm {
-    text-align: center;
-    margin-bottom: 20px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 /* info */
 
 .info {
-    text-align: justify;
-    margin: 40px auto 40px auto;
-    max-width: 700px;
+	text-align: justify;
+	margin: 40px auto 40px auto;
+	max-width: 700px;
 }
 
 .info a {
-    color: var(--accent-color);
+	color: var(--accent-color);
 }
 
 /* welcome message */
 
 #welcome {
-    display: none;
-    margin: 50px 0px 20px 0px;
-    text-align: center;
-    color: var(--accent-color);
+	display: none;
+	margin: 50px 0px 20px 0px;
+	text-align: center;
+	color: var(--accent-color);
 }
 
 /* form */
 
 .form {
-    max-width: 400px;
-    margin: 0 auto;
-    display: none;
-    position: relative;
+	max-width: 400px;
+	margin: 0 auto;
+	display: none;
+	position: relative;
 }
 
-label[for="titleInput"],
-label[for="idInput"] {
-    display: block;
+label[for='titleInput'],
+label[for='idInput'] {
+	display: block;
 }
 
 .formControl {
-    padding: 10px 0px;
+	padding: 10px 0px;
 }
 
-.form input[type="text"] {
-    color: var(--secondary-accent-color);
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 3px;
-    width: 100%;
-    background-color: transparent;
-    border-bottom: 1px solid var(--lightgray-color);
+.form input[type='text'] {
+	color: var(--secondary-accent-color);
+	text-align: center;
+	padding: 5px;
+	margin-bottom: 3px;
+	width: 100%;
+	background-color: transparent;
+	border-bottom: 1px solid var(--lightgray-color);
 }
 
-.form input[type="text"]:focus {
-    border-bottom: 1px solid var(--font-color);
+.form input[type='text']:focus {
+	border-bottom: 1px solid var(--font-color);
 }
 
-.form input[type="checkbox"] {
-    margin: 2px;
+.form input[type='checkbox'] {
+	margin: 2px;
 }
 
 #idContainer {
-    display: none;
+	display: none;
 }
 
 .fa-question-circle {
-    font-size: 14px;
-    margin-left: 2px;
-    transform: translateY(-3px);
+	font-size: 14px;
+	margin-left: 2px;
+	transform: translateY(-3px);
 }
 
 .fa-question-circle:hover {
-    cursor: pointer;
-    color: var(--accent-color);
+	cursor: pointer;
+	color: var(--accent-color);
 }
 
 #saveInfo {
-    text-align: justify;
-    display: none;
-    font-size: 18px;
-    line-height: 1.2;
-    padding: 10px 0px 0px 18px;
+	text-align: justify;
+	display: none;
+	font-size: 18px;
+	line-height: 1.2;
+	padding: 10px 0px 0px 18px;
 }
 
 #snapShotControls {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
 }
 
 #deleteBtn {
-    display: none;
-    margin: 0;
-    font-size: 18px;
-    padding: 5px 10px;
+	display: none;
+	margin: 0;
+	font-size: 18px;
+	padding: 5px 10px;
 }
 
 #deleteInfo {
-    display: none;
+	display: none;
 }
 
 /* find playlists button */
 
 #findBtn {
-    display: none;
-    left: 50%;
+	display: none;
+	left: 50%;
 }
 
 /* loading spinner */
 
 .spinner {
-    position: absolute;
-    left: 50%;
-    transform: translateX(50%);
-    width: 20px;
-    height: 20px;
-    border: 3px solid white;
-    border-top: 3px solid transparent;
-    border-radius: 50%;
-    animation: rotate 2.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+	position: absolute;
+	left: 50%;
+	transform: translateX(50%);
+	width: 20px;
+	height: 20px;
+	border: 3px solid white;
+	border-top: 3px solid transparent;
+	border-radius: 50%;
+	animation: rotate 2.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotateZ(0deg);
-    }
-    100% {
-        transform: rotateZ(360deg);
-    }
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(360deg);
+	}
 }
 
 /* playlist display */
 
 #playlists {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 }
 
 .summary {
-    text-align: center;
-    margin: 10px 0px 20px;
+	text-align: center;
+	margin: 10px 0px 20px;
 }
 
 .playlistContainer {
-    margin: 20px 0px;
-    padding: 20px;
-    border-bottom: 1px solid var(--lightgray-color);
+	margin: 20px 0px;
+	padding: 20px;
+	border-bottom: 1px solid var(--lightgray-color);
 }
 
 .playlistName {
-    color: var(--accent-color);
-    font-size: 25px;
+	color: var(--accent-color);
+	font-size: 25px;
 }
 
 .playlistName:hover {
-    opacity: 0.8;
+	opacity: 0.8;
 }
 
 .playlistDescription {
-    font-size: 16px;
-    font-style: italic;
-    line-height: 1.2;
+	font-size: 16px;
+	font-style: italic;
+	line-height: 1.2;
 }
 
 .trackContainer {
-    margin: 20px 0px 0px 25px;
+	margin: 20px 0px 0px 25px;
 }
 
 .track {
-    color: var(--secondary-accent-color);
+	color: var(--secondary-accent-color);
 }
 
 .trackListing {
-    margin: 5px 0px;
+	margin: 5px 0px;
 }
 
 .track:hover {
-    color: var(--accent-color);
+	color: var(--accent-color);
 }
 
 @media (min-width: 720px) {
-    .info {
-        margin: 40px auto 80px auto;
-    }
+	.info {
+		margin: 40px auto 80px auto;
+	}
 }
