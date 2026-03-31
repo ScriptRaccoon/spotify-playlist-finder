@@ -16,7 +16,7 @@ app.set('view engine', 'ejs')
 // various packages
 const axios = require('axios')
 const qs = require('qs')
-require('dotenv').config()
+require('dotenv').config({ quiet: true })
 
 // main route
 app.get('/', (_req, res) => {
@@ -36,13 +36,10 @@ app.get('/finder', (req, res) => {
 app.get('/authorize', (_req, res) => {
 	const scopes = 'playlist-read-private playlist-read-collaborative'
 	res.redirect(
-		'https://accounts.spotify.com/authorize' +
-			'?response_type=code' +
-			'&client_id=' +
-			process.env.CLIENT_ID +
-			(scopes ? `&scope=${encodeURIComponent(scopes)}` : '') +
-			'&redirect_uri=' +
-			encodeURIComponent(process.env.REDIRECT_URI),
+		'https://accounts.spotify.com/authorize?response_type=code' +
+			`&client_id=${process.env.CLIENT_ID}` +
+			`&scope=${encodeURIComponent(scopes)}` +
+			`&redirect_uri=${encodeURIComponent(process.env.REDIRECT_URI)}`,
 	)
 })
 
