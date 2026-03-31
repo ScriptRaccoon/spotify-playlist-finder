@@ -18,7 +18,7 @@ async function getPlaylists(options) {
 					const response = await fetch(url, { headers })
 					const data = await response.json()
 					if (data.error) {
-						throw new Error(data.error.status + ': ' + data.error.message)
+						throw new Error(`${data.error.status}: ${data.error.message}`)
 					}
 					for (const playlist of data.items) {
 						const { id, name, description, external_urls } = playlist

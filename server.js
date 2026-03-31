@@ -2,8 +2,8 @@
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
-const server = app.listen(PORT, () => {
-	console.log('Server running on port ' + PORT)
+app.listen(PORT, () => {
+	console.info(`Server running on port ${PORT}`)
 })
 
 // middleware for static files
@@ -19,28 +19,28 @@ const qs = require('qs')
 require('dotenv').config()
 
 // main route
-app.get('/', function (req, res) {
+app.get('/', (_req, res) => {
 	res.render('index')
 })
 
 // finder route
-app.get('/finder', function (req, res) {
-	if (!req.query.access_token) {
-		res.send(`Error: No access token provided`)
-	} else {
+app.get('/finder', (req, res) => {
+	if (req.query.access_token) {
 		res.render('finder', { query: req.query })
+	} else {
+		res.send(`Error: No access token provided`)
 	}
 })
 
 // spotify authorization
-app.get('/authorize', function (req, res) {
+app.get('/authorize', (_req, res) => {
 	const scopes = 'playlist-read-private playlist-read-collaborative'
 	res.redirect(
 		'https://accounts.spotify.com/authorize' +
 			'?response_type=code' +
 			'&client_id=' +
 			process.env.CLIENT_ID +
-			(scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+			(scopes ? `&scope=${encodeURIComponent(scopes)}` : '') +
 			'&redirect_uri=' +
 			encodeURIComponent(process.env.REDIRECT_URI),
 	)
@@ -109,7 +109,7 @@ app.get('/newtoken', async (req, res) => {
 	}
 	const body = qs.stringify({
 		grant_type: 'refresh_token',
-		refresh_token: refresh_token,
+		refresh_token,
 	})
 	try {
 		const response = await axios.post(url, body, headers)
